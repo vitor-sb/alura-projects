@@ -1,3 +1,9 @@
+import domain.Conta
+
 fun main(){
-    print("Olá Mundo!")
+    println("Bem vindo ao DevBank!")
+
+    val contaVitor = Conta()
+    contaVitor.titular = "Vitor"
+
 }
