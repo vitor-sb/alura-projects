@@ -1,11 +1,11 @@
 package models.contas
 
-class Conta(
+abstract class Conta(
     var titular: String,
     val numero: Int
 ) {
     var saldo: Double = 0.0
-        private set
+        protected set
 
     fun deposita(valor: Double) {
         if (valor > 0){
@@ -15,14 +15,7 @@ class Conta(
         }
     }
 
-    fun saca(valor: Double) {
-        if (this.saldo < valor)
-            return println(
-                "Conta ${this.numero} não possui o saldo necessário. (Valor: R$$valor)"
-            )
-        this.saldo -= valor
-        println("Sacando valor R$$valor da conta ${this.numero}")
-    }
+    abstract fun saca(valor: Double)
 
     fun transfere(
         contaDestino: Conta, valor: Double

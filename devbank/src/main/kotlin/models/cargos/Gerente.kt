@@ -8,14 +8,23 @@ open class Gerente(
 ) : Funcionario(nome = nome, cpf = cpf, salario = salario) {
     var autenticado: Boolean = false
 
-    override val calculaBonificacao get() = this.salario * 0.3
+    override val bonificacao: Double
+        get() {
+            if (this.autenticado)
+                return this.salario + this.salario * 0.5
+            println("Gerente não autenticado.")
+            return 0.0
+        }
 
     fun autentica(senha: Int) {
+        println("Autenticando usuário...")
+
         if (this.senha == senha){
             println("Usuário ${this.nome} autenticado!")
-            autenticado =  true
+            autenticado = true
+            return
         }
         println("Usuário ${this.nome} não autenticado!")
-        autenticado =  false
+        autenticado = false
     }
 }
