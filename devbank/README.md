@@ -1,13 +1,19 @@
-## Utilidades para o For
+# DevBank
+Projeto criado a partir da formação em kotlin para explicação das atividades e os diferenciais da linguagem.
 
-#### 1. Existe a função downTo para ir do 5 até o 1
+[Formação Kotlin](https://cursos.alura.com.br/formacao-kotlin)
+
+## Anotações
+### Utilidades para o For
+
+#### 1. Existe a range expression chamada downTo para ir do 5 até o 1
     Ex. for (i in 5 downTo 2) {...}
 
 #### 2. Da para pular a contagem para ir de dois em dois, ou mais números
     Ex. for (i in 1..5 step 2) {...}
 
 
-## Utilidades para o If
+### Utilidades para o If
 #### 1. Da para criar blocos de validação
     Ex. 
         when{
