@@ -1,28 +1,26 @@
-package model
+package models.contas
 
-class Conta(
+abstract class Conta(
     var titular: String,
     val numero: Int
 ) {
     var saldo: Double = 0.0
-        private set
+        protected set
 
     fun deposita(valor: Double) {
-        if (valor > 0)
+        if (valor > 0){
             this.saldo += valor
+            println("Valor R$$valor depositado na conta ${this.numero}")
+
+        }
     }
 
-    fun saca(valor: Double) {
-        if (this.saldo < valor)
-            return println(
-                "Não possui o saldo necessário. (Valor: R$$valor)"
-            )
-        this.saldo -= valor
-    }
+    abstract fun saca(valor: Double)
 
     fun transfere(
         contaDestino: Conta, valor: Double
     ) {
+        println("Iniciando transferência da conta ${this.numero} para ${contaDestino.numero}")
         if (this.saldo < valor)
             return println(
                 "Conta ${this.numero} não possui o saldo necessário. (Valor: R$$valor)"
@@ -32,5 +30,6 @@ class Conta(
         this.saldo -= valor
 
         contaDestino.deposita(valor)
+        println("Transferência realizada!")
     }
 }
