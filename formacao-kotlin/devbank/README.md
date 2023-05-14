@@ -3,6 +3,8 @@ Projeto criado a partir da formação em kotlin para explicação das atividades
 
 [Formação Kotlin](https://cursos.alura.com.br/formacao-kotlin)
 
+### jdk 11.0.18
+
 ## Anotações
 ### Utilidades para o For
 
