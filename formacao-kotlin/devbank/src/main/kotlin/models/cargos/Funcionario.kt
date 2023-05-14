@@ -5,6 +5,6 @@ abstract class Funcionario(
     val cpf: String,
     val salario: Double,
 ) {
-    abstract val bonificacao : Double
+    abstract val bonificacao: Double
 
 }

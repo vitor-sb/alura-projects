@@ -9,18 +9,10 @@ class Diretor(
 
     override val bonificacao: Double
         get() {
-            if (this.autenticado)
-                return super.bonificacao + salario
-            println("Diretor não autenticado")
-            return 0.0
-
+            return super.bonificacao + salario
         }
 
     fun calculaPlr(): Double {
-        if (this.autenticado)
-            return this.salario * 0.5
-
-        println("Diretor não autenticado")
-        return 0.0
+        return this.salario * 0.5
     }
 }

@@ -1,7 +1,3 @@
-import models.contas.ContaCorrente
-import models.contas.ContaPoupanca
-import testes.testaFuncoesCargo
-import testes.testaFuncoesConta
 import java.util.*
 
 fun main() {
@@ -10,5 +6,6 @@ fun main() {
 //    testaFuncoesConta()
 //    testaFuncoesCargo()
 //    testaFuncoesConta()
+//    testeAutenticacao()
 
 }
