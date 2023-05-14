@@ -1,7 +1,7 @@
 # DevBank
 Projeto criado a partir da formação em kotlin para explicação das atividades e os diferenciais da linguagem.
 
-[Formação Kotlin](https://cursos.alura.com.br/formacao-kotlin)
+[Formação Kotlin](https://cursos.alura.com.br/formacao-kotlin) *🚧 Em andamento 🚧*
 
 ### jdk 11.0.18
 
