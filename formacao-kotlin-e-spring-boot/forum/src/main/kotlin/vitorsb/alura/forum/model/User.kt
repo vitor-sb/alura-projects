@@ -2,9 +2,8 @@ package vitorsb.alura.forum.model
 
 import java.util.*
 
-data class Curso(
+data class User(
     val id: String? = UUID.randomUUID().toString(),
-    val nome: String,
-    val categoria: String
-) {
-}
+    val name: String,
+    val email: String
+)

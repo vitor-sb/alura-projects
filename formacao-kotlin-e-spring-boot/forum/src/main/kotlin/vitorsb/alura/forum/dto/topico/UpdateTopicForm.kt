@@ -1,20 +1,18 @@
-package vitorsb.alura.forum.dto.topico
+package vitorsb.alura.forum.dto.topic
 
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
-data class AtualizaTopicoForm(
-
+data class UpdateTopicForm(
     @field:NotNull
     val id: String,
 
     @field:NotEmpty
     @field:Size(min = 5, max = 80)
-    val titulo: String,
+    val title: String,
 
     @field:NotEmpty
     @field:Size(min = 10, max = 255)
-    val mensagem: String,
-) {
-}
+    val message: String,
+)
