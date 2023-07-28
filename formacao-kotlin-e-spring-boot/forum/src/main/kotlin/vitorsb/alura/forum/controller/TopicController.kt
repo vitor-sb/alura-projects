@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.util.UriComponentsBuilder
-import vitorsb.alura.forum.dto.topic.UpdateTopicForm
-import vitorsb.alura.forum.dto.topic.NewTopicForm
-import vitorsb.alura.forum.dto.topic.TopicView
+import vitorsb.alura.forum.dto.topic.UpdateTopicDTO
+import vitorsb.alura.forum.dto.topic.NewTopicDTO
+import vitorsb.alura.forum.dto.topic.TopicDTO
 import vitorsb.alura.forum.service.TopicService
 import javax.validation.Valid
 
@@ -25,27 +25,27 @@ class TopicController(
 ) {
 
     @GetMapping
-    fun list(): List<TopicView> {
+    fun list(): List<TopicDTO> {
         return service.list()
     }
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: String): TopicView {
+    fun getById(@PathVariable id: String): TopicDTO {
         return service.getById(id)
     }
 
     @PostMapping
     fun create(
-        @RequestBody @Valid dto: NewTopicForm,
+        @RequestBody @Valid dto: NewTopicDTO,
         uriBuilder: UriComponentsBuilder
-    ): ResponseEntity<TopicView> {
+    ): ResponseEntity<TopicDTO> {
         val createdTopic = service.create(dto)
         val uri = uriBuilder.path("/topics/${createdTopic.id}").build().toUri()
         return ResponseEntity.created(uri).body(createdTopic)
     }
 
     @PutMapping
-    fun update(@RequestBody @Valid dto: UpdateTopicForm): ResponseEntity<TopicView> {
+    fun update(@RequestBody @Valid dto: UpdateTopicDTO): ResponseEntity<TopicDTO> {
         val updatedTopic = service.update(dto)
         return ResponseEntity.ok(updatedTopic)
     }

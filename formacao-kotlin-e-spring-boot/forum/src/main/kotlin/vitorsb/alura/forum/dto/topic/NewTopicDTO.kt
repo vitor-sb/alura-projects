@@ -4,7 +4,7 @@ import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
-data class NewTopicForm(
+data class NewTopicDTO(
     @field:NotEmpty
     @field:Size(min = 5, max = 80)
     val title: String,
