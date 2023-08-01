@@ -6,7 +6,7 @@ import vitorsb.alura.forum.dto.topic.UpdateTopicDTO
 import vitorsb.alura.forum.dto.topic.NewTopicDTO
 import vitorsb.alura.forum.model.Topic
 import vitorsb.alura.forum.dto.topic.TopicDTO
-import vitorsb.alura.forum.mapper.topic.TopicMapper
+import vitorsb.alura.forum.mapper.TopicMapper
 import vitorsb.alura.forum.repository.TopicRepository
 
 @Service

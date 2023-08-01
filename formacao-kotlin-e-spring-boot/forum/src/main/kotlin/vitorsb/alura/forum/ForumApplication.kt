@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 import org.springframework.boot.runApplication
 import java.util.*
 
-@SpringBootApplication(exclude = [DataSourceAutoConfiguration::class])
+@SpringBootApplication
 class ForumApplication
 
 fun main(args: Array<String>) {

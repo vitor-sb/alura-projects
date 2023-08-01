@@ -1,0 +1,132 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0001-create-tables
+      author: vitor-sb
+      changes:
+        - createTable:
+            tableName: course
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: category
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(160)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: topic
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: message
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: creation_date
+                  type: datetime
+              - column:
+                  name: course_id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_course_topic
+                    references:
+                      tableName: course
+                      columnNames: id
+              - column:
+                  name: author_id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_topic_author
+                    references:
+                      tableName: user
+                      columnNames: id
+              - column:
+                  name: status
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: answer
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: message
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: creation_date
+                  type: datetime
+              - column:
+                  name: author_id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_answer_author
+                    references:
+                      tableName: user
+                      columnNames: id
+              - column:
+                  name: topic_id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_topic_answer
+                    references:
+                      tableName: topic
+                      columnNames: id
+              - column:
+                  name: is_solution
+                  type: boolean
+                  constraints:
+                    nullable: true

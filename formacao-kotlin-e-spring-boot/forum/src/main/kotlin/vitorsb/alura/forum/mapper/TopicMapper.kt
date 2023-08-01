@@ -1,4 +1,4 @@
-package vitorsb.alura.forum.mapper.topic
+package vitorsb.alura.forum.mapper
 
 import org.springframework.stereotype.Component
 import vitorsb.alura.forum.dto.topic.NewTopicDTO

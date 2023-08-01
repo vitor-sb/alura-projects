@@ -3,7 +3,7 @@ package vitorsb.alura.forum.repository
 import org.springframework.stereotype.Repository
 import vitorsb.alura.forum.dto.topic.TopicDTO
 import vitorsb.alura.forum.exception.NotFoundException
-import vitorsb.alura.forum.mapper.topic.TopicMapper
+import vitorsb.alura.forum.mapper.TopicMapper
 import vitorsb.alura.forum.model.Topic
 import java.util.stream.Collectors
 
