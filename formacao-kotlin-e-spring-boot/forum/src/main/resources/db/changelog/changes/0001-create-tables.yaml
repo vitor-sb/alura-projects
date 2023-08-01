@@ -92,12 +92,12 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: title
-                  type: varchar(200)
+                  type: varchar(125)
                   constraints:
                     nullable: false
               - column:
                   name: message
-                  type: varchar(255)
+                  type: varchar(500)
                   constraints:
                     nullable: false
               - column:
@@ -150,7 +150,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: message
-                  type: varchar(255)
+                  type: varchar(500)
                   constraints:
                     nullable: false
               - column:

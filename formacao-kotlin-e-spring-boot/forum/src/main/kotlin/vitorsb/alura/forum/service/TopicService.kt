@@ -8,17 +8,17 @@ import vitorsb.alura.forum.dto.topic.NewTopicDTO
 import vitorsb.alura.forum.model.Topic
 import vitorsb.alura.forum.dto.topic.TopicDTO
 import vitorsb.alura.forum.exception.NotFoundException
-import vitorsb.alura.forum.model.mapper.TopicMapper.delete
-import vitorsb.alura.forum.model.mapper.TopicMapper.toDto
-import vitorsb.alura.forum.model.mapper.TopicMapper.toModel
-import vitorsb.alura.forum.model.mapper.TopicMapper.update
+import vitorsb.alura.forum.mapper.TopicMapper.delete
+import vitorsb.alura.forum.mapper.TopicMapper.toDto
+import vitorsb.alura.forum.mapper.TopicMapper.toModel
+import vitorsb.alura.forum.mapper.TopicMapper.update
 import vitorsb.alura.forum.repository.TopicRepository
 
 @Service
 class TopicService(
+    private val repository: TopicRepository,
     private val courseService: CourseService,
-    private val userService: UserService,
-    private val repository: TopicRepository
+    private val userService: UserService
 ) {
     private val notFoundMessage: String = "Topic not found!"
 

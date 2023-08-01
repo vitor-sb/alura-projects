@@ -12,8 +12,10 @@ data class User(
     @Column(nullable = false, length = 36)
     override val id: String,
 
+    @Column(nullable = false, length = 100)
     val name: String,
 
+    @Column(nullable = false, length = 160)
     val email: String
 
 ): Auditable, Identifiable<String>, Serializable {

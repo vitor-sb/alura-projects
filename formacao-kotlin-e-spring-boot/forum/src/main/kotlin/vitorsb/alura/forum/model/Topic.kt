@@ -14,8 +14,10 @@ data class Topic(
     @Column(nullable = false, length = 36)
     override var id: String,
 
+    @Column(nullable = false, length = 125)
     val title: String,
 
+    @Column(nullable = false, length = 500)
     val message: String,
 
     @ManyToOne
@@ -27,6 +29,7 @@ data class Topic(
     val author: User,
 
     @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false, length = 32)
     val status: TopicStatus = TopicStatus.NAO_RESPONDIDO,
 
     @OneToMany(mappedBy = "topic")
