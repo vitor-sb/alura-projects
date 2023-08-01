@@ -15,6 +15,9 @@ databaseChangeLog:
               - column:
                   name: category
                   value: "Kotlin"
+              - column:
+                  name: created_date
+                  value: NOW()
         - insert:
             tableName: user
             columns:
@@ -27,3 +30,6 @@ databaseChangeLog:
               - column:
                   name: email
                   value: "vitor@test.com"
+              - column:
+                  name: created_date
+                  value: NOW()

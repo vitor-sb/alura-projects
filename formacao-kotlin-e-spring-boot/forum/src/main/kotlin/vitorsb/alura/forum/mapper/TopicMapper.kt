@@ -7,6 +7,7 @@ import vitorsb.alura.forum.dto.topic.UpdateTopicDTO
 import vitorsb.alura.forum.model.Course
 import vitorsb.alura.forum.model.Topic
 import vitorsb.alura.forum.model.User
+import java.time.LocalDateTime
 import java.util.*
 
 @Component
@@ -26,21 +27,30 @@ object TopicMapper {
             id = this.id,
             title = this.title,
             message = this.message,
-            creationDate = this.creationDate,
             status = this.status
         )
     }
 
-    fun Topic.update(updatedTopic: UpdateTopicDTO): Topic {
-        return Topic(
+    fun Topic.update(dto: UpdateTopicDTO): Topic {
+        val updatedTopic = Topic(
             id = this.id,
-            title = updatedTopic.title,
-            message = updatedTopic.message,
+            title = dto.title,
+            message = dto.message,
             course = this.course,
             author = this.author,
             replies = this.replies,
             status = this.status,
-            creationDate = this.creationDate
         )
+
+        updatedTopic.audit = this.audit
+        updatedTopic.audit.lastModifiedDate = LocalDateTime.now()
+
+        return updatedTopic
+    }
+
+    fun Topic.delete(): Topic {
+        this.audit.removed = true
+        this.audit.lastModifiedDate = LocalDateTime.now()
+        return this
     }
 }

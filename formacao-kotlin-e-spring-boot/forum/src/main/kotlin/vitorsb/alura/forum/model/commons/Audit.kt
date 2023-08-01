@@ -11,30 +11,33 @@ import javax.persistence.Embeddable
 import javax.validation.constraints.NotNull
 
 @Embeddable
-class Audit : Serializable {
+data class Audit(
     @get:NotNull
     @Column(name = "removed", nullable = false)
-    var removed: Boolean = false
+    var removed: Boolean = false,
 
     @CreatedBy
-    var createdBy: String? = null
+    @Column(length = 36)
+    var createdBy: String? = null,
 
     @CreatedDate
-    var createdDate: LocalDateTime? = null
+    @Column(nullable = false)
+    var createdDate: LocalDateTime = LocalDateTime.now()
 
+) : Serializable {
     @LastModifiedBy
+    @Column(length = 36)
     var lastModifiedBy: String? = null
 
     @LastModifiedDate
     var lastModifiedDate: LocalDateTime? = null
 
-
     override fun toString(): String {
         return "Audit(" +
-            "removed=$removed, " +
-            "createdBy=$createdBy, " +
-            "createdDate=$createdDate, " +
-            "lastModifiedBy=$lastModifiedBy, " +
-            "lastModifiedDate=$lastModifiedDate)"
+                "removed=$removed, " +
+                "createdBy=$createdBy, " +
+                "createdDate=$createdDate, " +
+                "lastModifiedBy=$lastModifiedBy, " +
+                "lastModifiedDate=$lastModifiedDate)"
     }
 }
