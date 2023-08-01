@@ -1,5 +1,5 @@
 # Alura Forum
-Projeto criado a partir da formação em kotlin e Spring Boot para explicação das aulas e os diferenciais do framework.
+Projeto criado a partir da formação em Kotlin e Spring Boot para explicação das aulas e os diferenciais do framework.
 
 [Formação Kotlin e Spring Boot](https://cursos.alura.com.br/formacao-kotlin-spring-boot) *🚧 Em andamento 🚧*
 
@@ -28,7 +28,7 @@ Projeto criado a partir da formação em kotlin e Spring Boot para explicação 
 1. OpenJDK 11
 2. Kotlin 1.6.21
 3. Docker
-4. MySQL
+4. MySQL 8.0.33
 
 ### Definindo as variaveis de ambiente utilizadas no application.yml 
 #### IntelliJ IDEA
