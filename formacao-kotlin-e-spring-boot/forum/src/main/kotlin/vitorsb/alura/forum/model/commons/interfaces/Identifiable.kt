@@ -2,6 +2,6 @@ package vitorsb.alura.forum.model.commons.interfaces
 
 import java.io.Serializable
 
-interface Identifiable<ID : Serializable> {
-    val id: ID
+interface Identifiable<UUID : Serializable> {
+    val id: UUID
 }

@@ -6,6 +6,7 @@ import javax.validation.constraints.Size
 
 data class UpdateTopicDTO(
     @field:NotNull
+    @field:Size(min = 36, max = 36)
     val id: String,
 
     @field:NotEmpty
