@@ -1,7 +1,6 @@
 package vitorsb.alura.forum.service
 
 import org.slf4j.LoggerFactory
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import vitorsb.alura.forum.exception.NotFoundException
 import vitorsb.alura.forum.model.User
@@ -17,8 +16,8 @@ class UserService(
 
     fun getUserById(id: String): User {
         logger.info("M=getUserById - Retrieving user by id:${id}")
-        return repository.findByIdOrNull(id)
-            ?: throw NotFoundException("M=getById, userId=${id} - $notFoundMessage")
-
+        return repository.findByIdAndAuditRemovedFalse(id).orElseThrow {
+            NotFoundException("M=getUserById, userId=${id} - $notFoundMessage")
+        }
     }
 }
