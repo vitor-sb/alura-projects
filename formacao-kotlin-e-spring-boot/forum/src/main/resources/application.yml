@@ -1,5 +1,5 @@
 application:
-  url: jdbc:mysql://localhost:3306/${MYSQL_DATABASE}
+  url: jdbc:mysql://localhost:3305/${MYSQL_DATABASE}
   username: ${MYSQL_USER}
   password: ${MYSQL_PASSWORD}
 #server:
@@ -18,10 +18,8 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
         show-sql: true
         format_sql: true
-#    when false, it avoids performance problems and forces the use of the Transactional annotation
-    open-in-view: false
-#        required for Hibernate to start collecting statistics
-#        generate_statistics: true
+#        generate_statistics: true # required for Hibernate to start collecting statistics
+    open-in-view: false # when false, it avoids performance problems and forces the use of the Transactional annotation
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
 logging:
