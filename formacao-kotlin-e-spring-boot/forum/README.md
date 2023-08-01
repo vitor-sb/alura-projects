@@ -1,5 +1,5 @@
 # Alura Forum
-Projeto criado a partir da formação em kotlim e Spring Boot para explicação das aulas e os diferenciais do framework.
+Projeto criado a partir da formação em kotlin e Spring Boot para explicação das aulas e os diferenciais do framework.
 
 [Formação Kotlin e Spring Boot](https://cursos.alura.com.br/formacao-kotlin-spring-boot) *🚧 Em andamento 🚧*
 
