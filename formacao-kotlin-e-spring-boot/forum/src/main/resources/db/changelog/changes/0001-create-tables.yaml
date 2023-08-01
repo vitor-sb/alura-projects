@@ -104,22 +104,16 @@ databaseChangeLog:
                   name: course_id
                   type: varchar(36)
                   constraints:
-                    primaryKey: true
                     nullable: false
                     foreignKeyName: fk_course_topic
-                    references:
-                      tableName: course
-                      columnNames: id
+                    references: course(id)
               - column:
                   name: author_id
                   type: varchar(36)
                   constraints:
-                    primaryKey: true
                     nullable: false
                     foreignKeyName: fk_topic_author
-                    references:
-                      tableName: user
-                      columnNames: id
+                    references: user(id)
               - column:
                   name: status
                   type: varchar(32)
@@ -163,22 +157,16 @@ databaseChangeLog:
                   name: author_id
                   type: varchar(36)
                   constraints:
-                    primaryKey: true
                     nullable: false
                     foreignKeyName: fk_answer_author
-                    references:
-                      tableName: user
-                      columnNames: id
+                    references: user(id)
               - column:
                   name: topic_id
                   type: varchar(36)
                   constraints:
-                    primaryKey: true
                     nullable: false
                     foreignKeyName: fk_topic_answer
-                    references:
-                      tableName: topic
-                      columnNames: id
+                    references: topic(id)
               - column:
                   name: is_solution
                   type: boolean

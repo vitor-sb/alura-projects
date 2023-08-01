@@ -37,7 +37,7 @@ class TopicService(
     @Transactional
     fun update(dto: UpdateTopicDTO): TopicDTO {
         logger.info("M=update - Updating topic with id:${dto.id}")
-        val oldTopic = repository.findByIdAndAuditRemovedFalseOrNull(dto.id)
+        val oldTopic = repository.findByIdAndAuditRemovedFalse(dto.id)
             ?: throw NotFoundException("M=update, topicId=${dto.id} - $notFoundMessage")
         val updatedTopic = oldTopic.update(dto)
         return repository.save(updatedTopic).toDto()
@@ -52,21 +52,21 @@ class TopicService(
 
     fun getById(id: String): TopicDTO {
         logger.info("M=getById - Retrieving topic by id:${id}")
-        val topic = repository.findByIdAndAuditRemovedFalseOrNull(id)
+        val topic = repository.findByIdAndAuditRemovedFalse(id)
             ?: throw NotFoundException("M=getById, topicId=${id} - $notFoundMessage")
         return topic.toDto()
     }
 
     fun getTopicById(id: String): Topic {
         logger.info("M=getTopicById:Topic - Retrieving topic by id:${id}")
-        return repository.findByIdAndAuditRemovedFalseOrNull(id)
+        return repository.findByIdAndAuditRemovedFalse(id)
             ?: throw NotFoundException("M=getTopicById, topicId=${id} - $notFoundMessage")
     }
 
     @Transactional
     fun delete(id: String) {
         logger.info("M=delete - Deleting topic with id:${id}")
-        val topic = repository.findByIdAndAuditRemovedFalseOrNull(id)
+        val topic = repository.findByIdAndAuditRemovedFalse(id)
             ?: throw NotFoundException("M=getById, topicId=${id} - $notFoundMessage")
 
         repository.save(topic.delete())

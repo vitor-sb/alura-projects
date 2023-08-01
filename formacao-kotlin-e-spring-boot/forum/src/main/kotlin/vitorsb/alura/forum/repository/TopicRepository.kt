@@ -6,6 +6,6 @@ import vitorsb.alura.forum.model.Topic
 
 @Repository
 interface TopicRepository : JpaRepository<Topic, String> {
-    fun findByIdAndAuditRemovedFalseOrNull(id: String): Topic?
+    fun findByIdAndAuditRemovedFalse(id: String): Topic?
     fun findAllByAuditRemovedFalse(): List<Topic>
 }
