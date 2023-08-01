@@ -10,37 +10,37 @@ import vitorsb.alura.forum.model.User
 import java.util.*
 
 @Component
-class TopicMapper {
-    fun dtoToModel(dto: NewTopicDTO, course: Course, author: User): Topic {
+object TopicMapper {
+    fun NewTopicDTO.toModel(course: Course, author: User): Topic {
         return Topic(
             id = UUID.randomUUID().toString(),
-            title = dto.title,
-            message = dto.message,
+            title = this.title,
+            message = this.message,
             course = course,
             author = author
         )
     }
 
-    fun modelToDto(t: Topic): TopicDTO {
+    fun Topic.toDto(): TopicDTO {
         return TopicDTO(
-            id = t.id,
-            title = t.title,
-            message = t.message,
-            creationDate = t.creationDate,
-            status = t.status
+            id = this.id,
+            title = this.title,
+            message = this.message,
+            creationDate = this.creationDate,
+            status = this.status
         )
     }
 
-    fun updateTopic(oldTopic: Topic, updatedTopic: UpdateTopicDTO): Topic {
+    fun Topic.update(updatedTopic: UpdateTopicDTO): Topic {
         return Topic(
-            id = oldTopic.id,
+            id = this.id,
             title = updatedTopic.title,
             message = updatedTopic.message,
-            course = oldTopic.course,
-            author = oldTopic.author,
-            replies = oldTopic.replies,
-            status = oldTopic.status,
-            creationDate = oldTopic.creationDate
+            course = this.course,
+            author = this.author,
+            replies = this.replies,
+            status = this.status,
+            creationDate = this.creationDate
         )
     }
 }

@@ -2,15 +2,14 @@ package vitorsb.alura.forum.model
 
 import vitorsb.alura.forum.model.enums.TopicStatus
 import java.time.LocalDateTime
-import java.util.*
 import javax.persistence.*
 import kotlin.collections.ArrayList
 
 @Entity
 data class Topic(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: String? = UUID.randomUUID().toString(),
+    @Column(nullable = false, length = 36)
+    var id: String,
     val title: String,
     val message: String,
     val creationDate: LocalDateTime = LocalDateTime.now(),

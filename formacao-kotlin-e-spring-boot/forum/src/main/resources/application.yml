@@ -13,13 +13,15 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
-    show-sql: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+        show-sql: true
         format_sql: true
-        # required for Hibernate to start collecting statistics
-        generate_statistics: true
+#    when false, it avoids performance problems and forces the use of the Transactional annotation
+    open-in-view: false
+#        required for Hibernate to start collecting statistics
+#        generate_statistics: true
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
 logging:
@@ -28,6 +30,8 @@ logging:
     org:
       hibernate:
         SQL: DEBUG
+#        stat: DEBUG
+        LazyInitializationException: DEBUG
       springframework: INFO
     web: ERROR
     liquibase: ERROR

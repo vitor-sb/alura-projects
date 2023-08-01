@@ -1,16 +1,12 @@
 package vitorsb.alura.forum.model
 
-import java.util.*
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 data class Course(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: String? = UUID.randomUUID().toString(),
+    @Column(nullable = false, length = 36)
+    val id: String,
     val name: String,
     val category: String
 )

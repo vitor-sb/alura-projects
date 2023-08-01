@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0002-populate-course-and-user
+      author: vitor-sb
+      changes:
+        - insert:
+            tableName: course
+            columns:
+              - column:
+                  name: id
+                  value: "49070eeb-6634-45b6-9c77-0c5e28959c86"
+              - column:
+                  name: name
+                  value: "Kotlin with Spring Boot"
+              - column:
+                  name: category
+                  value: "Kotlin"
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  value: "fc31377d-bb89-42ba-9bed-0d228bbdde65"
+              - column:
+                  name: name
+                  value: "Vitor"
+              - column:
+                  name: email
+                  value: "vitor@test.com"

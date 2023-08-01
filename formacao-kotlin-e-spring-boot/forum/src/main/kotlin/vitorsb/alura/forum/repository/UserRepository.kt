@@ -2,7 +2,8 @@ package vitorsb.alura.forum.repository
 
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
-import vitorsb.alura.forum.model.Topic
+import vitorsb.alura.forum.model.Course
+import vitorsb.alura.forum.model.User
 
 @Repository
-interface TopicRepository: JpaRepository<Topic, String>
+interface UserRepository: JpaRepository<User, String>

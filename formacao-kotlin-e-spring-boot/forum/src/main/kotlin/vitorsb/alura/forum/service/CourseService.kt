@@ -1,24 +1,24 @@
 package vitorsb.alura.forum.service
 
+import org.slf4j.LoggerFactory
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import vitorsb.alura.forum.exception.NotFoundException
 import vitorsb.alura.forum.model.Course
-import java.util.*
+import vitorsb.alura.forum.repository.CourseRepository
 
 @Service
 class CourseService(
-    var courses: List<Course>
+    private val repository: CourseRepository
 ) {
-    init {
-        val course = Course(
-            id = "49070eeb-6634-45b6-9c77-0c5e28959c86",
-            name = "Kotlin with Spring Boot",
-            category = "Kotlin"
-        )
+    private val notFoundMessage: String = "Course not found!"
 
-        courses = Arrays.asList(course)
-    }
+    private val logger = LoggerFactory.getLogger(CourseService::class.java)
 
-    fun getById(id: String): Course {
-        return courses.stream().filter { c -> c.id == id }.findFirst().get()
+    fun getCourseById(id: String): Course {
+        logger.info("M=getCourseById - Retrieving course by id:${id}")
+        return repository.findByIdOrNull(id)
+            ?: throw NotFoundException("M=getCourseById, courseId=${id} - $notFoundMessage")
+
     }
 }
