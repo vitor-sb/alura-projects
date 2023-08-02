@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.util.UriComponentsBuilder
 import vitorsb.alura.forum.dto.topic.UpdateTopicDTO
 import vitorsb.alura.forum.dto.topic.NewTopicDTO
+import vitorsb.alura.forum.dto.topic.TopicByCategoryDTO
 import vitorsb.alura.forum.dto.topic.TopicDTO
 import vitorsb.alura.forum.service.TopicService
 import java.util.Optional
@@ -49,6 +50,11 @@ class TopicController(
         pagination: Pageable
     ): Page<TopicDTO> {
         return service.find(courseName, pagination)
+    }
+
+    @GetMapping("report")
+    fun findReport(): List<TopicByCategoryDTO> {
+        return service.findReport()
     }
 
     @PutMapping

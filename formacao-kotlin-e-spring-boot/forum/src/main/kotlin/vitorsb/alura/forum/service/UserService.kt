@@ -1,6 +1,8 @@
 package vitorsb.alura.forum.service
 
 import org.slf4j.LoggerFactory
+import org.springframework.cache.annotation.CacheEvict
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import vitorsb.alura.forum.dto.user.*
@@ -21,6 +23,7 @@ class UserService(
     private val logger = LoggerFactory.getLogger(UserService::class.java)
 
     @Transactional
+    @CacheEvict(value = ["getUserById"], allEntries = true)
     fun create(dto: NewUserDTO): UserDTO {
         logger.info("M=create - Creating user")
 
@@ -28,6 +31,7 @@ class UserService(
         return persistedUser.toDto()
     }
 
+    @Cacheable("getUserById")
     fun getUserById(id: String): User {
         logger.info("M=getUserById - Retrieving user by id:${id}")
         return repository.findByIdAndAuditRemovedFalse(id).orElseThrow {
@@ -36,6 +40,7 @@ class UserService(
     }
 
     @Transactional
+    @CacheEvict(value = ["getUserById"], allEntries = true)
     fun update(dto: UpdateUserDTO): UserDTO {
         logger.info("M=update - Updating user with id:${dto.id}")
         val oldUser = repository.findByIdAndAuditRemovedFalse(dto.id).orElseThrow {
@@ -46,6 +51,7 @@ class UserService(
     }
 
     @Transactional
+    @CacheEvict(value = ["getUserById"], allEntries = true)
     fun delete(id: String) {
         logger.info("M=delete - Deleting user with id:${id}")
         val user = repository.findByIdAndAuditRemovedFalse(id).orElseThrow {

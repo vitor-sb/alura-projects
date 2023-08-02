@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import vitorsb.alura.forum.dto.topic.UpdateTopicDTO
 import vitorsb.alura.forum.dto.topic.NewTopicDTO
+import vitorsb.alura.forum.dto.topic.TopicByCategoryDTO
 import vitorsb.alura.forum.entity.Topic
 import vitorsb.alura.forum.dto.topic.TopicDTO
 import vitorsb.alura.forum.exception.NotFoundException
@@ -59,8 +60,10 @@ class TopicService(
     ): Page<TopicDTO> {
         logger.info("M=find, courseName=${courseName} - Running the topic page list function")
         val topicList = if (courseName.isPresent) {
-            logger.info("M=find, courseName=${courseName.get()} - " +
-                    "Listing pages with all topics not removed by course name")
+            logger.info(
+                "M=find, courseName=${courseName.get()} - " +
+                        "Listing pages with all topics not removed by course name"
+            )
             repository.findAllByAuditRemovedFalseAndCourseName(courseName.get(), pagination)
         } else {
             logger.info("M=find - Listing pages with all topics not removed")
@@ -68,6 +71,11 @@ class TopicService(
         }
 
         return topicList.toDto()
+    }
+
+    fun findReport(): List<TopicByCategoryDTO> {
+        logger.info("M=find - Search the number of topics by category")
+        return repository.findReport()
     }
 
     @Transactional
