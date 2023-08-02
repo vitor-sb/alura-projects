@@ -28,19 +28,6 @@ class TopicController(
     private val service: TopicService
 ) {
 
-    @GetMapping
-    fun findAll(
-        @RequestParam(required = false) courseName: Optional<String>,
-        pagination: Pageable
-    ): Page<TopicDTO> {
-        return service.findAll(courseName, pagination)
-    }
-
-    @GetMapping("/{id}")
-    fun getById(@PathVariable id: String): TopicDTO {
-        return service.getById(id)
-    }
-
     @PostMapping
     fun create(
         @RequestBody @Valid dto: NewTopicDTO,
@@ -49,6 +36,19 @@ class TopicController(
         val createdTopic = service.create(dto)
         val uri = uriBuilder.path("/topics/${createdTopic.id}").build().toUri()
         return ResponseEntity.created(uri).body(createdTopic)
+    }
+
+    @GetMapping("/{id}")
+    fun getById(@PathVariable id: String): TopicDTO {
+        return service.getById(id)
+    }
+
+    @GetMapping
+    fun find(
+        @RequestParam(required = false) courseName: Optional<String>,
+        pagination: Pageable
+    ): Page<TopicDTO> {
+        return service.find(courseName, pagination)
     }
 
     @PutMapping

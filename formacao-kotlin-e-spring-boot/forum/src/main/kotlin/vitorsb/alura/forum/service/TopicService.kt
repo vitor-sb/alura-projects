@@ -37,24 +37,6 @@ class TopicService(
         return persistedTopic.toDto()
     }
 
-    fun findAll(
-        courseName: Optional<String>,
-        pagination: Pageable
-    ): Page<TopicDTO> {
-        logger.info("M=list, courseName=${courseName} - Running the topic page list function")
-        val topicList = if (courseName.isPresent) {
-            logger.info(
-                "M=list, courseName=${courseName.get()} - Listing pages with all topics not removed by course name"
-            )
-            repository.findAllByAuditRemovedFalseAndCourseName(courseName.get(), pagination)
-        } else {
-            logger.info("M=list - Listing pages with all topics not removed")
-            repository.findAllByAuditRemovedFalse(pagination)
-        }
-
-        return topicList.toDto()
-    }
-
     fun getById(id: String): TopicDTO {
         logger.info("M=getById - Retrieving topic by id:${id}")
         val topic = repository.findByIdAndAuditRemovedFalse(id).orElseThrow {
@@ -68,6 +50,23 @@ class TopicService(
         return repository.findByIdAndAuditRemovedFalse(id).orElseThrow {
             NotFoundException("M=getTopicById, topicId=${id} - $notFoundMessage")
         }
+    }
+
+    fun find(
+        courseName: Optional<String>,
+        pagination: Pageable
+    ): Page<TopicDTO> {
+        logger.info("M=find, courseName=${courseName} - Running the topic page list function")
+        val topicList = if (courseName.isPresent) {
+            logger.info("M=find, courseName=${courseName.get()} - " +
+                    "Listing pages with all topics not removed by course name")
+            repository.findAllByAuditRemovedFalseAndCourseName(courseName.get(), pagination)
+        } else {
+            logger.info("M=find - Listing pages with all topics not removed")
+            repository.findAllByAuditRemovedFalse(pagination)
+        }
+
+        return topicList.toDto()
     }
 
     @Transactional

@@ -26,8 +26,8 @@ class CourseService(
     fun create(dto: NewCourseDTO): CourseDTO {
         logger.info("M=create - Creating course")
 
-        val pressitedCourse = repository.save(dto.toEntity())
-        return pressitedCourse.toDto()
+        val persistedCourse = repository.save(dto.toEntity())
+        return persistedCourse.toDto()
     }
 
     fun getCourseById(id: String): Course {
