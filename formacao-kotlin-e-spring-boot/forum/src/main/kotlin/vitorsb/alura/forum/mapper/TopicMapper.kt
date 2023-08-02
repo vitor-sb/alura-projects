@@ -2,28 +2,27 @@ package vitorsb.alura.forum.mapper
 
 import org.springframework.data.domain.Page
 import org.springframework.stereotype.Component
+import vitorsb.alura.forum.commons.interfaces.Mappable
 import vitorsb.alura.forum.dto.topic.NewTopicDTO
 import vitorsb.alura.forum.dto.topic.TopicDTO
 import vitorsb.alura.forum.dto.topic.UpdateTopicDTO
-import vitorsb.alura.forum.entity.Course
 import vitorsb.alura.forum.entity.Topic
-import vitorsb.alura.forum.entity.User
 import java.time.LocalDateTime
 import java.util.*
 
 @Component
-object TopicMapper {
-    fun NewTopicDTO.toEntity(course: Course, author: User): Topic {
+object TopicMapper : Mappable<Topic, TopicDTO, NewTopicDTO, UpdateTopicDTO> {
+    override fun NewTopicDTO.toEntity(): Topic {
         return Topic(
             id = UUID.randomUUID().toString(),
             title = this.title,
             message = this.message,
-            course = course,
-            author = author
+            course = requireNotNull(this.course) { "M=NewTopicDTO.toEntity - Course attribute is required" },
+            author = requireNotNull(this.author) { "M=NewTopicDTO.toEntity - Author attribute is required" }
         )
     }
 
-    fun Topic.toDto(): TopicDTO {
+    override fun Topic.toDto(): TopicDTO {
         return TopicDTO(
             id = this.id,
             title = this.title,
@@ -38,7 +37,7 @@ object TopicMapper {
         }
     }
 
-    fun Topic.update(dto: UpdateTopicDTO): Topic {
+    override fun Topic.update(dto: UpdateTopicDTO): Topic {
         val updatedTopic = Topic(
             id = this.id,
             title = dto.title,
@@ -55,7 +54,7 @@ object TopicMapper {
         return updatedTopic
     }
 
-    fun Topic.delete(): Topic {
+    override fun Topic.delete(): Topic {
         this.audit.removed = true
         this.audit.lastModifiedDate = LocalDateTime.now()
         return this

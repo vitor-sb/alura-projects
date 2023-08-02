@@ -1,6 +1,6 @@
-package vitorsb.alura.forum.entity.commons.interfaces
+package vitorsb.alura.forum.commons.interfaces
 
-import vitorsb.alura.forum.entity.commons.Audit
+import vitorsb.alura.forum.commons.Audit
 
 interface Auditable {
     val audit: Audit

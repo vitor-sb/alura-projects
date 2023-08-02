@@ -8,7 +8,7 @@ package vitorsb.alura.forum.commons.interfaces
  * @param <N> NewEntityDTO
  * @param <U> UpdateEntityDTO
  */
-interface GenericMapper<E, D, N, U> {
+interface Mappable<E, D, N, U> {
     fun N.toEntity(): E
 
     fun E.toDto(): D

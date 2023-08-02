@@ -1,8 +1,8 @@
 package vitorsb.alura.forum.entity
 
-import vitorsb.alura.forum.entity.commons.Audit
-import vitorsb.alura.forum.entity.commons.interfaces.Auditable
-import vitorsb.alura.forum.entity.commons.interfaces.Identifiable
+import vitorsb.alura.forum.commons.Audit
+import vitorsb.alura.forum.commons.interfaces.Auditable
+import vitorsb.alura.forum.commons.interfaces.Identifiable
 import vitorsb.alura.forum.entity.enums.TopicStatus
 import java.io.Serializable
 import javax.persistence.*
