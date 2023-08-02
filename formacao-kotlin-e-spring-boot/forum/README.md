@@ -13,9 +13,10 @@ Projeto criado a partir da formação em Kotlin e Spring Boot para explicação 
 3. Utilização do [LoggerFactory](https://www.slf4j.org/api/org/slf4j/LoggerFactory.html)
 4. Configuração logging level modificada no application.yml
 5. Arquitetura de pastas um pouco distintas
-6. Estrutura e comportamentos dos Mappers
-7. Utilização de auditoria
-8. Implementação do [HibernateStatistics](https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#statistics) (Não utilizado)
+6. Implementação de interfaces
+7. Estrutura e comportamentos dos Mappers
+8. Utilização de auditoria
+9. Implementação do [HibernateStatistics](https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#statistics) (Não utilizado)
 
 ---
 
