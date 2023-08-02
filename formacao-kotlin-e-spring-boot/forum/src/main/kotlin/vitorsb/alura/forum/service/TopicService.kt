@@ -30,10 +30,11 @@ class TopicService(
     @Transactional
     fun create(dto: NewTopicDTO): TopicDTO {
         logger.info("M=create - Creating topic")
-        val course = courseService.getCourseById(dto.courseId)
-        val author = userService.getUserById(dto.authorId)
 
-        val persistedTopic = repository.save(dto.toEntity(course, author))
+        dto.course = courseService.getCourseById(dto.courseId)
+        dto.author = userService.getUserById(dto.authorId)
+
+        val persistedTopic = repository.save(dto.toEntity())
         return persistedTopic.toDto()
     }
 
