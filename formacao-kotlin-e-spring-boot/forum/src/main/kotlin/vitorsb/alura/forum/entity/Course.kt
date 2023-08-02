@@ -1,13 +1,13 @@
-package vitorsb.alura.forum.model
+package vitorsb.alura.forum.entity
 
-import vitorsb.alura.forum.model.commons.Audit
-import vitorsb.alura.forum.model.commons.interfaces.Auditable
-import vitorsb.alura.forum.model.commons.interfaces.Identifiable
+import vitorsb.alura.forum.entity.commons.Audit
+import vitorsb.alura.forum.entity.commons.interfaces.Auditable
+import vitorsb.alura.forum.entity.commons.interfaces.Identifiable
 import java.io.Serializable
 import javax.persistence.*
 
 @Entity
-data class User(
+data class Course(
     @Id
     @Column(nullable = false, length = 36)
     override val id: String,
@@ -15,8 +15,8 @@ data class User(
     @Column(nullable = false, length = 100)
     val name: String,
 
-    @Column(nullable = false, length = 160)
-    val email: String
+    @Column(nullable = false, length = 100)
+    val category: String
 
 ): Auditable, Identifiable<String>, Serializable {
     @Embedded

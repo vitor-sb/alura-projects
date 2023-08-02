@@ -1,4 +1,4 @@
-package vitorsb.alura.forum.model.commons.interfaces
+package vitorsb.alura.forum.entity.commons.interfaces
 
 import java.io.Serializable
 

@@ -1,4 +1,4 @@
-package vitorsb.alura.forum.model.enums
+package vitorsb.alura.forum.entity.enums
 
 enum class TopicStatus {
     NAO_RESPONDIDO,

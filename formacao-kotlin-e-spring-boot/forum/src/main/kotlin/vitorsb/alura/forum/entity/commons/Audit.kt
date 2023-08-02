@@ -1,4 +1,4 @@
-package vitorsb.alura.forum.model.commons
+package vitorsb.alura.forum.entity.commons
 
 import org.springframework.data.annotation.CreatedBy
 import org.springframework.data.annotation.CreatedDate

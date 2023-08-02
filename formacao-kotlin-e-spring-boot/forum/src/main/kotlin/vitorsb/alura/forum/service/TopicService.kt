@@ -1,18 +1,21 @@
 package vitorsb.alura.forum.service
 
 import org.slf4j.LoggerFactory
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import vitorsb.alura.forum.dto.topic.UpdateTopicDTO
 import vitorsb.alura.forum.dto.topic.NewTopicDTO
-import vitorsb.alura.forum.model.Topic
+import vitorsb.alura.forum.entity.Topic
 import vitorsb.alura.forum.dto.topic.TopicDTO
 import vitorsb.alura.forum.exception.NotFoundException
 import vitorsb.alura.forum.mapper.TopicMapper.delete
 import vitorsb.alura.forum.mapper.TopicMapper.toDto
-import vitorsb.alura.forum.mapper.TopicMapper.toModel
+import vitorsb.alura.forum.mapper.TopicMapper.toEntity
 import vitorsb.alura.forum.mapper.TopicMapper.update
 import vitorsb.alura.forum.repository.TopicRepository
+import java.util.*
 
 @Service
 class TopicService(
@@ -30,25 +33,26 @@ class TopicService(
         val course = courseService.getCourseById(dto.courseId)
         val author = userService.getUserById(dto.authorId)
 
-        val persistedTopic = repository.save(dto.toModel(course, author))
+        val persistedTopic = repository.save(dto.toEntity(course, author))
         return persistedTopic.toDto()
     }
 
-    @Transactional
-    fun update(dto: UpdateTopicDTO): TopicDTO {
-        logger.info("M=update - Updating topic with id:${dto.id}")
-        val oldTopic = repository.findByIdAndAuditRemovedFalse(dto.id).orElseThrow {
-            NotFoundException("M=update, topicId=${dto.id} - $notFoundMessage")
+    fun findAll(
+        courseName: Optional<String>,
+        pagination: Pageable
+    ): Page<TopicDTO> {
+        logger.info("M=list, courseName=${courseName} - Running the topic page list function")
+        val topicList = if (courseName.isPresent) {
+            logger.info(
+                "M=list, courseName=${courseName.get()} - Listing pages with all topics not removed by course name"
+            )
+            repository.findAllByAuditRemovedFalseAndCourseName(courseName.get(), pagination)
+        } else {
+            logger.info("M=list - Listing pages with all topics not removed")
+            repository.findAllByAuditRemovedFalse(pagination)
         }
-        val updatedTopic = oldTopic.update(dto)
-        return repository.save(updatedTopic).toDto()
-    }
 
-    fun list(): List<TopicDTO> {
-        logger.info("M=list - Listing all not removed topics")
-        return repository.findAllByAuditRemovedFalse().map {
-            it.toDto()
-        }
+        return topicList.toDto()
     }
 
     fun getById(id: String): TopicDTO {
@@ -60,10 +64,20 @@ class TopicService(
     }
 
     fun getTopicById(id: String): Topic {
-        logger.info("M=getTopicById:Topic - Retrieving topic by id:${id}")
+        logger.info("M=getTopicById - Retrieving topic by id:${id}")
         return repository.findByIdAndAuditRemovedFalse(id).orElseThrow {
             NotFoundException("M=getTopicById, topicId=${id} - $notFoundMessage")
         }
+    }
+
+    @Transactional
+    fun update(dto: UpdateTopicDTO): TopicDTO {
+        logger.info("M=update - Updating topic with id:${dto.id}")
+        val oldTopic = repository.findByIdAndAuditRemovedFalse(dto.id).orElseThrow {
+            NotFoundException("M=update, topicId=${dto.id} - $notFoundMessage")
+        }
+        val updatedTopic = oldTopic.update(dto)
+        return repository.save(updatedTopic).toDto()
     }
 
     @Transactional

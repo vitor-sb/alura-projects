@@ -1,18 +1,19 @@
 package vitorsb.alura.forum.mapper
 
+import org.springframework.data.domain.Page
 import org.springframework.stereotype.Component
 import vitorsb.alura.forum.dto.topic.NewTopicDTO
 import vitorsb.alura.forum.dto.topic.TopicDTO
 import vitorsb.alura.forum.dto.topic.UpdateTopicDTO
-import vitorsb.alura.forum.model.Course
-import vitorsb.alura.forum.model.Topic
-import vitorsb.alura.forum.model.User
+import vitorsb.alura.forum.entity.Course
+import vitorsb.alura.forum.entity.Topic
+import vitorsb.alura.forum.entity.User
 import java.time.LocalDateTime
 import java.util.*
 
 @Component
 object TopicMapper {
-    fun NewTopicDTO.toModel(course: Course, author: User): Topic {
+    fun NewTopicDTO.toEntity(course: Course, author: User): Topic {
         return Topic(
             id = UUID.randomUUID().toString(),
             title = this.title,
@@ -29,6 +30,12 @@ object TopicMapper {
             message = this.message,
             status = this.status
         )
+    }
+
+    fun Page<Topic>.toDto(): Page<TopicDTO> {
+        return this.map {
+            it.toDto()
+        }
     }
 
     fun Topic.update(dto: UpdateTopicDTO): Topic {
