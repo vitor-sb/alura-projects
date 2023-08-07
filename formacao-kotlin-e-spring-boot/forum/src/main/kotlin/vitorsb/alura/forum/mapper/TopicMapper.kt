@@ -37,11 +37,11 @@ object TopicMapper : Mappable<Topic, TopicDTO, NewTopicDTO, UpdateTopicDTO> {
         }
     }
 
-    override fun Topic.update(dto: UpdateTopicDTO): Topic {
+    override fun Topic.toUpdated(updatedDto: UpdateTopicDTO): Topic {
         val updatedTopic = Topic(
             id = this.id,
-            title = dto.title,
-            message = dto.message,
+            title = updatedDto.title,
+            message = updatedDto.message,
             course = this.course,
             author = this.author,
             replies = this.replies,
@@ -54,7 +54,7 @@ object TopicMapper : Mappable<Topic, TopicDTO, NewTopicDTO, UpdateTopicDTO> {
         return updatedTopic
     }
 
-    override fun Topic.delete(): Topic {
+    override fun Topic.toDeleted(): Topic {
         this.audit.removed = true
         this.audit.lastModifiedDate = LocalDateTime.now()
         return this

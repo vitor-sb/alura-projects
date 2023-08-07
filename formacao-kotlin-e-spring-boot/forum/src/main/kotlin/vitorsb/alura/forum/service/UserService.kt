@@ -8,10 +8,10 @@ import org.springframework.transaction.annotation.Transactional
 import vitorsb.alura.forum.dto.user.*
 import vitorsb.alura.forum.exception.NotFoundException
 import vitorsb.alura.forum.entity.User
-import vitorsb.alura.forum.mapper.UserMapper.delete
+import vitorsb.alura.forum.mapper.UserMapper.toDeleted
 import vitorsb.alura.forum.mapper.UserMapper.toDto
 import vitorsb.alura.forum.mapper.UserMapper.toEntity
-import vitorsb.alura.forum.mapper.UserMapper.update
+import vitorsb.alura.forum.mapper.UserMapper.toUpdated
 import vitorsb.alura.forum.repository.UserRepository
 
 @Service
@@ -46,7 +46,7 @@ class UserService(
         val oldUser = repository.findByIdAndAuditRemovedFalse(dto.id).orElseThrow {
             NotFoundException("M=update, userId=${dto.id} - $notFoundMessage")
         }
-        val updatedUser = oldUser.update(dto)
+        val updatedUser = oldUser.toUpdated(dto)
         return repository.save(updatedUser).toDto()
     }
 
@@ -58,6 +58,6 @@ class UserService(
             NotFoundException("M=delete, userId=${id} - $notFoundMessage")
         }
 
-        repository.save(user.delete())
+        repository.save(user.toDeleted())
     }
 }

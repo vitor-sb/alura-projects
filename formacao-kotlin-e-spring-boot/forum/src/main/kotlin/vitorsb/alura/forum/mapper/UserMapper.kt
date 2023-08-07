@@ -25,11 +25,11 @@ object UserMapper: Mappable<User, UserDTO, NewUserDTO, UpdateUserDTO> {
         )
     }
 
-    override fun User.update(dto: UpdateUserDTO): User {
+    override fun User.toUpdated(updatedDto: UpdateUserDTO): User {
         val updatedUser = User(
             id = this.id,
-            name = dto.name,
-            email = dto.email
+            name = updatedDto.name,
+            email = updatedDto.email
         )
 
         updatedUser.audit = this.audit
@@ -38,7 +38,7 @@ object UserMapper: Mappable<User, UserDTO, NewUserDTO, UpdateUserDTO> {
         return updatedUser
     }
 
-    override fun User.delete(): User {
+    override fun User.toDeleted(): User {
         this.audit.removed = true
         this.audit.lastModifiedDate = LocalDateTime.now()
         return this

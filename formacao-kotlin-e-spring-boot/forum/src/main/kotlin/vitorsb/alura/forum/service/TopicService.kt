@@ -5,16 +5,13 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import vitorsb.alura.forum.dto.topic.UpdateTopicDTO
-import vitorsb.alura.forum.dto.topic.NewTopicDTO
-import vitorsb.alura.forum.dto.topic.TopicByCategoryDTO
+import vitorsb.alura.forum.dto.topic.*
 import vitorsb.alura.forum.entity.Topic
-import vitorsb.alura.forum.dto.topic.TopicDTO
 import vitorsb.alura.forum.exception.NotFoundException
-import vitorsb.alura.forum.mapper.TopicMapper.delete
+import vitorsb.alura.forum.mapper.TopicMapper.toDeleted
 import vitorsb.alura.forum.mapper.TopicMapper.toDto
 import vitorsb.alura.forum.mapper.TopicMapper.toEntity
-import vitorsb.alura.forum.mapper.TopicMapper.update
+import vitorsb.alura.forum.mapper.TopicMapper.toUpdated
 import vitorsb.alura.forum.repository.TopicRepository
 import java.util.*
 
@@ -84,7 +81,7 @@ class TopicService(
         val oldTopic = repository.findByIdAndAuditRemovedFalse(dto.id).orElseThrow {
             NotFoundException("M=update, topicId=${dto.id} - $notFoundMessage")
         }
-        val updatedTopic = oldTopic.update(dto)
+        val updatedTopic = oldTopic.toUpdated(dto)
         return repository.save(updatedTopic).toDto()
     }
 
@@ -95,6 +92,6 @@ class TopicService(
             NotFoundException("M=delete, topicId=${id} - $notFoundMessage")
         }
 
-        repository.save(topic.delete())
+        repository.save(topic.toDeleted())
     }
 }

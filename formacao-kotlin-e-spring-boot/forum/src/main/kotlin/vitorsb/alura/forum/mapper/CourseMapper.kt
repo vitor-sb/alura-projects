@@ -27,11 +27,11 @@ object CourseMapper: Mappable<Course, CourseDTO, NewCourseDTO, UpdateCourseDTO> 
         )
     }
 
-    override fun Course.update(dto: UpdateCourseDTO): Course {
+    override fun Course.toUpdated(updatedDto: UpdateCourseDTO): Course {
         val updatedCourse = Course(
             id = this.id,
-            name = dto.name,
-            category = dto.category
+            name = updatedDto.name,
+            category = updatedDto.category
         )
 
         updatedCourse.audit = this.audit
@@ -40,7 +40,7 @@ object CourseMapper: Mappable<Course, CourseDTO, NewCourseDTO, UpdateCourseDTO> 
         return updatedCourse
     }
 
-    override fun Course.delete(): Course {
+    override fun Course.toDeleted(): Course {
         this.audit.removed = true
         this.audit.lastModifiedDate = LocalDateTime.now()
         return this

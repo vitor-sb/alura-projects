@@ -10,10 +10,10 @@ import vitorsb.alura.forum.dto.course.NewCourseDTO
 import vitorsb.alura.forum.dto.course.UpdateCourseDTO
 import vitorsb.alura.forum.exception.NotFoundException
 import vitorsb.alura.forum.entity.Course
-import vitorsb.alura.forum.mapper.CourseMapper.delete
+import vitorsb.alura.forum.mapper.CourseMapper.toDeleted
 import vitorsb.alura.forum.mapper.CourseMapper.toDto
 import vitorsb.alura.forum.mapper.CourseMapper.toEntity
-import vitorsb.alura.forum.mapper.CourseMapper.update
+import vitorsb.alura.forum.mapper.CourseMapper.toUpdated
 import vitorsb.alura.forum.repository.CourseRepository
 
 @Service
@@ -49,7 +49,7 @@ class CourseService(
         val oldCourse = repository.findByIdAndAuditRemovedFalse(dto.id).orElseThrow {
             NotFoundException("M=update, courseId=${dto.id} - $notFoundMessage")
         }
-        val updatedCourse = oldCourse.update(dto)
+        val updatedCourse = oldCourse.toUpdated(dto)
         return repository.save(updatedCourse).toDto()
     }
 
@@ -61,6 +61,6 @@ class CourseService(
             NotFoundException("M=delete, courseId=${id} - $notFoundMessage")
         }
 
-        repository.save(course.delete())
+        repository.save(course.toDeleted())
     }
 }

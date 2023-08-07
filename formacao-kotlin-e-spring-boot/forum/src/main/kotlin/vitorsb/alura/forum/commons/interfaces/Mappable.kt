@@ -13,7 +13,7 @@ interface Mappable<E, D, N, U> {
 
     fun E.toDto(): D
 
-    fun E.update(dto: U): E
+    fun E.toUpdated(updatedDto: U): E
 
-    fun E.delete(): E
+    fun E.toDeleted(): E
 }
