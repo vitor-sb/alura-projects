@@ -1,15 +1,9 @@
-application:
-  url: jdbc:mysql://localhost:3305/${MYSQL_DATABASE}
-  username: ${MYSQL_USER}
-  password: ${MYSQL_PASSWORD}
-#server:
-#  port: 8484
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${application.url}
-    username: ${application.username}
-    password: ${application.password}
+    url: "jdbc:mysql://localhost:3305/${MYSQL_DATABASE}"
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: validate

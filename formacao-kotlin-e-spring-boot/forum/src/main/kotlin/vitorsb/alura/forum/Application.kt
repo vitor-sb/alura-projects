@@ -7,9 +7,9 @@ import java.util.*
 
 @EnableCaching
 @SpringBootApplication
-class ForumApplication
+class Application
 
 fun main(args: Array<String>) {
 	TimeZone.setDefault(TimeZone.getTimeZone("utc"))
-	runApplication<ForumApplication>(*args)
+	runApplication<Application>(*args)
 }
