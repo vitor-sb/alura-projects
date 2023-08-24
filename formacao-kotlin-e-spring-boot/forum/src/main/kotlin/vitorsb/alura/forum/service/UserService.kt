@@ -25,7 +25,7 @@ class UserService(
     @Transactional
     @CacheEvict(value = ["getUserById"], allEntries = true)
     fun create(dto: NewUserDTO): UserDTO {
-        logger.info("M=create - Creating user")
+        logger.debug("M=create - Creating user")
 
         val persistedUser = repository.save(dto.toEntity())
         return persistedUser.toDto()
@@ -33,7 +33,7 @@ class UserService(
 
     @Cacheable("getUserById")
     fun getUserById(id: String): User {
-        logger.info("M=getUserById - Retrieving user by id:${id}")
+        logger.debug("M=getUserById - Retrieving user by id:${id}")
         return repository.findByIdAndAuditRemovedFalse(id).orElseThrow {
             NotFoundException("M=getUserById, userId=${id} - $notFoundMessage")
         }
@@ -42,7 +42,7 @@ class UserService(
     @Transactional
     @CacheEvict(value = ["getUserById"], allEntries = true)
     fun update(dto: UpdateUserDTO): UserDTO {
-        logger.info("M=update - Updating user with id:${dto.id}")
+        logger.debug("M=update - Updating user with id:${dto.id}")
         val oldUser = repository.findByIdAndAuditRemovedFalse(dto.id).orElseThrow {
             NotFoundException("M=update, userId=${dto.id} - $notFoundMessage")
         }
@@ -53,7 +53,7 @@ class UserService(
     @Transactional
     @CacheEvict(value = ["getUserById"], allEntries = true)
     fun delete(id: String) {
-        logger.info("M=delete - Deleting user with id:${id}")
+        logger.debug("M=delete - Deleting user with id:${id}")
         val user = repository.findByIdAndAuditRemovedFalse(id).orElseThrow {
             NotFoundException("M=delete, userId=${id} - $notFoundMessage")
         }
