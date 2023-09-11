@@ -1,4 +1,4 @@
-# Alura Forum
+# TDD e Java
 Projeto criado a partir do curso TDD e Java para explicação das aulas e os diferenciais da prática.
 
 [Curso de
