@@ -7,12 +7,12 @@ import java.math.RoundingMode;
 
 public class BonusService {
 
-    public static BigDecimal valorMaxBonus = new BigDecimal("1000.00");
-
     public BigDecimal calcularBonus(Funcionario funcionario) {
         BigDecimal valor = funcionario.getSalario().multiply(new BigDecimal("0.1"));
-        if (valor.compareTo(valorMaxBonus) > 0) {
-            valor = valorMaxBonus;
+        if (valor.compareTo(new BigDecimal("1000")) > 0) {
+            throw new IllegalArgumentException(
+                    "Funcionário com salário superior a R$10.000,00 (Dez mil reais) não pode receber bônus."
+            );
         }
 
         return valor.setScale(2, RoundingMode.HALF_UP);

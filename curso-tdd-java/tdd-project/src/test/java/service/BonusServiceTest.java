@@ -7,14 +7,14 @@ import vitorsb.alura.service.BonusService;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BonusServiceTest {
 
     BonusService service = new BonusService();
 
     @Test
-    public void bonusDeveSerMilParaFuncionarioComSalarioMuitoAlto(){
+    public void bonusDeveRetornarErroParaFuncionarioComSalarioMuitoAlto(){
         // given
         Funcionario funcionario = new Funcionario(
                 "Vitor",
@@ -23,10 +23,18 @@ public class BonusServiceTest {
         );
 
         // when
-        BigDecimal bonus = service.calcularBonus(funcionario);
+        try{
+            service.calcularBonus(funcionario);
+            fail("M=calcularBonus não lançou exceção!");
+        } catch (Exception e){
+            assertEquals(
+                    "Funcionário com salário superior a R$10.000,00 (Dez mil reais) não pode receber bônus.",
+                    e.getMessage()
+            );
+        }
 
         // then
-        assertEquals(BonusService.valorMaxBonus, bonus);
+
     }
 
     @Test
