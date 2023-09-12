@@ -27,7 +27,7 @@ class CourseService(
     @Transactional
     @CacheEvict(value = ["getCourseById"], allEntries = true)
     fun create(dto: NewCourseDTO): CourseDTO {
-        logger.info("M=create - Creating course")
+        logger.debug("M=create - Creating course")
 
         val persistedCourse = repository.save(dto.toEntity())
         return persistedCourse.toDto()
@@ -35,7 +35,7 @@ class CourseService(
 
     @Cacheable("getCourseById")
     fun getCourseById(id: String): Course {
-        logger.info("M=getCourseById - Retrieving course by id:${id}")
+        logger.debug("M=getCourseById - Retrieving course by id:${id}")
         return repository.findByIdAndAuditRemovedFalse(id).orElseThrow {
             NotFoundException("M=getCourseById, courseId=${id} - $notFoundMessage")
         }
@@ -45,7 +45,7 @@ class CourseService(
     @Transactional
     @CacheEvict(value = ["getCourseById"], allEntries = true)
     fun update(dto: UpdateCourseDTO): CourseDTO {
-        logger.info("M=update - Updating course with id:${dto.id}")
+        logger.debug("M=update - Updating course with id:${dto.id}")
         val oldCourse = repository.findByIdAndAuditRemovedFalse(dto.id).orElseThrow {
             NotFoundException("M=update, courseId=${dto.id} - $notFoundMessage")
         }
@@ -56,7 +56,7 @@ class CourseService(
     @Transactional
     @CacheEvict(value = ["getCourseById"], allEntries = true)
     fun delete(id: String) {
-        logger.info("M=delete - Deleting course with id:${id}")
+        logger.debug("M=delete - Deleting course with id:${id}")
         val course = repository.findByIdAndAuditRemovedFalse(id).orElseThrow {
             NotFoundException("M=delete, courseId=${id} - $notFoundMessage")
         }

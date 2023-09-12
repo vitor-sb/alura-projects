@@ -27,7 +27,7 @@ class TopicService(
 
     @Transactional
     fun create(dto: NewTopicDTO): TopicDTO {
-        logger.info("M=create - Creating topic")
+        logger.debug("M=create - Creating topic")
 
         dto.course = courseService.getCourseById(dto.courseId)
         dto.author = userService.getUserById(dto.authorId)
@@ -37,7 +37,7 @@ class TopicService(
     }
 
     fun getById(id: String): TopicDTO {
-        logger.info("M=getById - Retrieving topic by id:${id}")
+        logger.debug("M=getById - Retrieving topic by id:${id}")
         val topic = repository.findByIdAndAuditRemovedFalse(id).orElseThrow {
             NotFoundException("M=getById, topicId=${id} - $notFoundMessage")
         }
@@ -45,7 +45,7 @@ class TopicService(
     }
 
     fun getTopicById(id: String): Topic {
-        logger.info("M=getTopicById - Retrieving topic by id:${id}")
+        logger.debug("M=getTopicById - Retrieving topic by id:${id}")
         return repository.findByIdAndAuditRemovedFalse(id).orElseThrow {
             NotFoundException("M=getTopicById, topicId=${id} - $notFoundMessage")
         }
@@ -55,15 +55,15 @@ class TopicService(
         courseName: Optional<String>,
         pagination: Pageable
     ): Page<TopicDTO> {
-        logger.info("M=find, courseName=${courseName} - Running the topic page list function")
+        logger.debug("M=find, courseName=${courseName} - Running the topic page list function")
         val topicList = if (courseName.isPresent) {
-            logger.info(
+            logger.debug(
                 "M=find, courseName=${courseName.get()} - " +
                         "Listing pages with all topics not removed by course name"
             )
             repository.findAllByAuditRemovedFalseAndCourseName(courseName.get(), pagination)
         } else {
-            logger.info("M=find - Listing pages with all topics not removed")
+            logger.debug("M=find - Listing pages with all topics not removed")
             repository.findAllByAuditRemovedFalse(pagination)
         }
 
@@ -71,13 +71,13 @@ class TopicService(
     }
 
     fun findReport(): List<TopicByCategoryDTO> {
-        logger.info("M=find - Search the number of topics by category")
+        logger.debug("M=find - Search the number of topics by category")
         return repository.findReport()
     }
 
     @Transactional
     fun update(dto: UpdateTopicDTO): TopicDTO {
-        logger.info("M=update - Updating topic with id:${dto.id}")
+        logger.debug("M=update - Updating topic with id:${dto.id}")
         val oldTopic = repository.findByIdAndAuditRemovedFalse(dto.id).orElseThrow {
             NotFoundException("M=update, topicId=${dto.id} - $notFoundMessage")
         }
@@ -87,7 +87,7 @@ class TopicService(
 
     @Transactional
     fun delete(id: String) {
-        logger.info("M=delete - Deleting topic with id:${id}")
+        logger.debug("M=delete - Deleting topic with id:${id}")
         val topic = repository.findByIdAndAuditRemovedFalse(id).orElseThrow {
             NotFoundException("M=delete, topicId=${id} - $notFoundMessage")
         }
