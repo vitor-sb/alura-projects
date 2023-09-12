@@ -31,5 +31,8 @@ databaseChangeLog:
                   name: email
                   value: "vitor@test.com"
               - column:
+                  name: password
+                  value: "$2a$12$wjtuJvAW3Ku6THnyymTc6OjaYwjROGJNPejVZfb4F2k0AMexMFH.i"
+              - column:
                   name: created_date
                   value: NOW()

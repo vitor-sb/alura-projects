@@ -25,6 +25,20 @@ class ExceptionHandler {
         )
     }
 
+    @ExceptionHandler(UnauthorizedException::class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    fun handleUnauthorized(
+        exception: UnauthorizedException,
+        request: HttpServletRequest
+    ): ErrorDTO {
+        return ErrorDTO(
+            status = HttpStatus.UNAUTHORIZED.value(),
+            error = HttpStatus.UNAUTHORIZED.name,
+            message = exception.message,
+            path = request.servletPath
+        )
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleValidationError(

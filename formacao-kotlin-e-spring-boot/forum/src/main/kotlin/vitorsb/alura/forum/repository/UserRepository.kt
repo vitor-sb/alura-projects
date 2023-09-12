@@ -7,6 +7,7 @@ import java.util.*
 
 @Repository
 interface UserRepository: JpaRepository<User, String>{
-    fun findByIdAndAuditRemovedFalse(id: String): Optional<User>
+    fun findByIdAndAuditRemovedFalse(id: String): User?
 
+    fun findByEmail(email:String): User?
 }

@@ -10,8 +10,8 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
-        show-sql: true
-        format_sql: true
+        show-sql: false
+        format_sql: false
 #        generate_statistics: true # required for Hibernate to start collecting statistics
     open-in-view: false # when false, it avoids performance problems and forces the use of the Transactional annotation
   liquibase:

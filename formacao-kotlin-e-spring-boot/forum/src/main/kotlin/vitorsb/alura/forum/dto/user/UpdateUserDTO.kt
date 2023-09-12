@@ -15,5 +15,9 @@ data class UpdateUserDTO(
 
     @field:NotEmpty
     @field:Size(min = 10, max = 160)
-    val email: String
+    val email: String,
+
+    @field:NotEmpty
+    @field:Size(min = 8, max = 255)
+    val password: String
 )

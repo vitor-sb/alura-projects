@@ -16,9 +16,12 @@ data class User(
     val name: String,
 
     @Column(nullable = false, length = 160)
-    val email: String
+    val email: String,
 
-): Auditable, Identifiable<String>, Serializable {
+    @Column(nullable = false, length = 255)
+    val password: String
+
+) : Auditable, Identifiable<String>, Serializable {
     @Embedded
     override var audit: Audit = Audit()
 }
